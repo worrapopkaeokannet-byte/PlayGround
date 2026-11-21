@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#101510" />
+  <title>OUTLAND — Tactical Extraction</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="app">
+    <section id="safehouse" class="screen">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">O</span><div><b>OUTLAND</b><small>FIELD OPERATIONS</small></div></div>
+        <div class="operator"><span class="online-dot"></span> SOLO OPERATOR <b>LVL 08</b><span class="currency">◈ <strong id="credits">2,450</strong></span></div>
+      </header>
+      <div class="safe-layout">
+        <aside class="side-nav"><div class="nav-item active">▦ <span>OPERATIONS</span></div><div class="nav-item">◫ <span>STASH</span></div><div class="nav-item">⚒ <span>TRADERS</span></div><div class="nav-item">▤ <span>INTEL</span></div><div class="nav-bottom">BUILD 0.1.4<br/>OFFLINE MODE</div></aside>
+        <section class="command">
+          <div class="eyebrow">SAFEHOUSE <i>•</i> NORTHERN FRONTIER</div>
+          <h1>Prepare for<br/><em>deployment.</em></h1>
+          <p class="lead">The valley is quiet. It won't stay that way.</p>
+          <div class="mission-card">
+            <div class="mission-top"><span class="pill">AVAILABLE OPERATION</span><span class="threat">THREAT <b>MODERATE</b></span></div>
+            <h2>Old Mill District</h2><p>Abandoned industrial outskirts · 18–24 min</p>
+            <div class="mission-stats"><span>◉ <b>3</b> extraction points</span><span>⌖ <b>Scav activity</b></span><span>☼ <b>Overcast</b></span></div>
+            <button id="deploy" class="deploy-btn">DEPLOY TO RAID <span>→</span></button>
+          </div>
+          <div class="briefing"><span class="brief-icon">!</span><p><b>FIELD BRIEFING</b><br/>Secure what you can carry. Extraction is your only way home. Uninsured equipment is lost if you are downed.</p></div>
+        </section>
+        <section class="gear-panel">
+          <div class="panel-head"><div><div class="eyebrow">READY KIT</div><h2>Loadout</h2></div><button id="modBtn" class="text-btn">EDIT KIT ↗</button></div>
+          <div class="operator-art"><div class="art-grid"></div><div class="silhouette"><div class="head"></div><div class="torso"></div><div class="arm a1"></div><div class="arm a2"></div><div class="leg l1"></div><div class="leg l2"></div></div><div class="art-caption">FIELD OPERATOR <b>01</b></div></div>
+          <div class="gear-slots">
+            <div class="gear-row"><span class="slot-icon">▱</span><div><small>PRIMARY</small><b>R-17 Carbine <i>5.56×45</i></b></div><span class="condition">92%</span></div>
+            <div class="gear-row"><span class="slot-icon">◈</span><div><small>ARMOR</small><b>Ranger Plate Carrier <i>Class III</i></b></div><span class="condition">78%</span></div>
+            <div class="gear-row"><span class="slot-icon">▣</span><div><small>PACK</small><b>Patrol Pack <i>18 slots</i></b></div><span class="condition">18/24</span></div>
+          </div>
+          <div class="stash-line"><span>STASH VALUE</span><b>₡ 18,720</b><span class="stash-meter"><i></i></span></div>
+        </section>
+      </div>
+      <footer class="safe-footer"><span>◉ SECURE CONNECTION <b>LOCAL</b></span><span>TRADER <b>OLD HANK</b> &nbsp; • &nbsp; STOCK REFRESH IN <b>04:32</b></span><span>© OUTLAND FIELD SYSTEMS</span></footer>
+      <div id="kitModal" class="modal hidden"><div class="modal-card"><button class="close" id="closeModal">×</button><div class="eyebrow">WEAPON WORKBENCH</div><h2>R-17 Carbine</h2><p>Balanced 5.56 platform tuned for controlled bursts.</p><div class="weapon-preview">R-17 <span>▰▰▰▰▱</span></div><div class="attachment-list"><span>OPTIC <b>Holo sight <i>INSTALLED</i></b></span><span>MUZZLE <b>Flash hider <i>INSTALLED</i></b></span><span>MAGAZINE <b>30-round polymer <i>STANDARD</i></b></span></div><button class="deploy-btn" id="doneKit">READY</button></div></div>
+    </section>
+    <section id="raid" class="screen hidden">
+      <canvas id="world"></canvas>
+      <div class="grain"></div>
+      <div class="raid-top"><div class="raid-brand"><span class="brand-mark small">O</span><div><b>OLD MILL</b><small>SECTOR 04 · DAY 12</small></div></div><div class="raid-center"><span class="raid-live"><i></i> LIVE OPERATION</span><b id="raidClock">00:00</b><small>TIME IN RAID</small></div><button id="mapToggle" class="mini-btn">⌖ <span>MAP</span></button></div>
+      <div class="compass" id="compass">N <span>····</span> E <span>····</span> S <span>····</span> W</div>
+      <div class="objective"><small>OBJECTIVE</small><b id="objectiveText">Search the district and extract</b><span id="objectiveSub">Find supplies. Stay alert.</span></div>
+      <div class="minimap-wrap"><div class="map-label">SECTOR 04 <span>● LIVE</span></div><canvas id="minimap" width="180" height="180"></canvas></div>
+      <div class="status-left"><div class="status-card"><div class="status-title">VITALS <span id="statusState">STABLE</span></div><div class="health-line"><span>HP</span><div class="bar"><i id="healthBar"></i></div><b id="healthValue">100</b></div><div class="health-line armor"><span>ARM</span><div class="bar"><i id="armorBar"></i></div><b id="armorValue">78</b></div><div class="limbs"><span>HEAD <i class="ok"></i></span><span>CHEST <i class="ok"></i></span><span>ARMS <i class="ok"></i></span><span>LEGS <i class="ok"></i></span></div></div></div>
+      <div class="weapon-hud"><div class="ammo-icon">▱</div><div><small>R-17 CARBINE <span>• SEMI / AUTO</span></small><div class="ammo"><b id="ammoCurrent">30</b><span>/</span><i id="ammoReserve">120</i></div></div><div class="fire-mode">AUTO</div></div>
+      <div class="interaction" id="interaction"><span class="key">E</span><span id="interactionText">SEARCH CONTAINER</span></div>
+      <div class="toast" id="toast"></div>
+      <div class="loot-panel hidden" id="lootPanel"><div class="loot-head"><div><small>CONTAINER SEARCHED</small><b id="lootTitle">Supply crate</b></div><button id="closeLoot">×</button></div><div id="lootItems" class="loot-items"></div><div class="loot-foot">TAP AN ITEM TO SECURE IT <span>ESC TO CLOSE</span></div></div>
+      <div class="extract-banner hidden" id="extractBanner"><span class="extract-pulse"></span><div><small>EXTRACTION AVAILABLE</small><b id="extractName">WEST GATE</b><span id="extractTimer">HOLD POSITION TO EXTRACT</span></div></div>
+      <div class="controls-hint"><span><b>WASD</b> MOVE</span><span><b>SHIFT</b> SPRINT</span><span><b>CLICK</b> FIRE</span><span><b>R</b> RELOAD</span><span><b>E</b> INTERACT</span></div>
+      <div class="mobile-controls"><div class="stick-zone" id="stickZone"><div class="stick" id="stick"></div></div><div class="mobile-actions"><button id="mobileAim">ADS</button><button id="mobileCrouch">CROUCH</button><button id="mobileFire" class="fire-button">FIRE</button><button id="mobileInteract">INTERACT</button><button id="mobileHeal">HEAL</button></div></div>
+      <div class="map-overlay hidden" id="mapOverlay"><div class="map-modal"><button id="closeMap">×</button><div class="eyebrow">TACTICAL MAP · SECTOR 04</div><h2>Old Mill District</h2><canvas id="bigmap" width="640" height="440"></canvas><div class="map-legend"><span>● YOU</span><span>◆ HOSTILE</span><span>□ CACHE</span><span>◎ EXTRACTION</span></div></div></div>
+      <div class="result-overlay hidden" id="result"><div class="result-card"><div class="result-kicker" id="resultKicker">OPERATION COMPLETE</div><h1 id="resultTitle">Extracted</h1><p id="resultText">You made it out.</p><div class="result-stats"><span>TIME IN RAID <b id="resultTime">00:00</b></span><span>HOSTILES <b id="resultKills">0</b></span><span>LOOT SECURED <b id="resultValue">₡ 0</b></span></div><button id="returnBase" class="deploy-btn">RETURN TO SAFEHOUSE →</button></div></div>
+    </section>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
